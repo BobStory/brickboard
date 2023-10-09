@@ -1,0 +1,178 @@
+/*
+https://www.realtimecolors.com/?colors=f0effa-0c0b23-635fce-0a0a1f-3e3abb&fonts=Poppins-Poppins
+*/
+
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Roboto+Mono&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+:root {
+  --text: rgb(240, 239, 250);
+  --background: rgb(12, 11, 35);
+  --primary: rgb(99, 95, 206);
+  --secondary: rgb(10, 10, 31);
+  --secondary-tone: rgb(25, 25, 59);
+  --accent: rgb(62, 58, 187);
+
+  --item-odd: rgb(0, 48, 86);
+  --item-even: rgb(4, 81, 140);
+  --item-head: rgb(6, 5, 18);
+
+  --primary-font: 'Roboto', sans-serif;
+  --secondary-font: 'Inter', sans-serif;
+  --mono-font: 'Roboto Mono', monospace;
+
+  --welcome-size: 2rem;
+  --primary-size: 1rem;
+  --secondary-size: .85rem;
+
+  --border-color: rgba(255, 255, 255, 0.1);
+
+  --generic-shadow: 0 0 2rem 0 rgba(0, 0, 0, .75);
+
+  --gradient-1: rgb(84, 0, 50);
+  --gradient-2: rgb(240, 67, 58);
+
+  --role-mod: rgb(41, 98, 255);
+  --role-dev: rgb(69, 191, 85);
+  --role-admin: rgb(205, 4, 2);
+
+  --access-full: rgb(46, 125, 50);
+  --access-restricted: rgb(242, 183, 5);
+  --access-privileged: rgb(210, 54, 0);
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --text: rgb(6, 5, 16);
+    --background: rgb(221, 220, 244);
+    --primary: rgb(53, 49, 160);
+    --secondary: rgb(224, 224, 245);
+    --accent: rgb(72, 68, 197);
+
+  }
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  color: var(--text);
+  font-family: var(--primary-font);
+  overflow: hidden;
+  user-select: none;
+}
+
+body,
+html,
+main {
+  background-color: var(--background);
+}
+
+body {
+  display: grid;
+  height: 100dvh;
+  position: relative;
+
+  grid-template-rows: min-content auto;
+  grid-template-columns: 20% auto;
+}
+
+main {
+  grid-row: 2 / 3;
+  grid-column: 2 / 3;
+  padding: 5rem;
+  height: 100%;
+  overflow-y: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img.img-avatar {
+  height: 4rem;
+  width: 4rem;
+  border-radius: 100%;
+  padding: .5rem;
+}
+
+span.gradient-font {
+  position: relative;
+  color: transparent;
+  background-clip: text;
+  background-image: linear-gradient(-45deg, var(--gradient-1), var(--gradient-2));
+}
+
+span.access,
+span.role {
+  text-transform: uppercase;
+  padding: .75rem;
+  font-weight: 600;
+  border-radius: .5rem;
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+}
+
+span.access svg,
+span.role svg {
+  height: 1.5rem;
+  width: 1.5rem;
+}
+
+span.role-mod {
+  background-color: var(--role-mod);
+}
+
+span.role-admin {
+  background-color: var(--role-admin);
+}
+
+span.role-dev {
+  background-color: var(--role-dev);
+}
+
+span.access-full {
+  background-color: var(--access-full);
+}
+
+span.access-restricted {
+  background-color: var(--access-restricted);
+}
+
+span.access-privileged {
+  background-color: var(--access-privileged);
+}
+
+.interface-item.reload-data {
+  background-color: var(--accent);
+  padding: .5rem;
+  border-radius: 100%;
+}
+
+.interface-item.searchbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: .25rem;
+  background-color: var(--accent);
+  padding: .5rem;
+  border-radius: .5rem;
+}
+
+.interface-item.searchbar input[type=search] {
+  all: unset;
+  background-color: var(--background);
+  width: 10rem;
+  height: 1.55rem;
+  border-radius: .5rem;
+  padding: .25rem .5rem;
+}
+
+.module.highlight-module {
+  background-color: var(--secondary-tone) !important;
+}
