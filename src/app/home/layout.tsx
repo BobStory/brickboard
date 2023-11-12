@@ -20,12 +20,10 @@ export default function RootLayout({
           locationHintContent: []
         }} />
         <Sidemap
-          render={{
-            reloadDataBtn: false,
-            searchBar: false
-          }}
           highlight_module={undefined}
-        />
+          render={{
+            jump_back: false
+          }} />
         {children}
       </body>
     </html>

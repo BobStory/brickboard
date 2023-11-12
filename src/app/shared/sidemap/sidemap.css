@@ -74,3 +74,27 @@ nav.sidemap-navigation .interface .interface-item svg {
     height: 1.25rem;
     width: 1.25rem;
 }
+
+.jump-back {
+    all: unset;
+    cursor: pointer;
+    border: 1px solid var(--border-color);
+    border-radius: 1rem;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1rem;
+    width: 5rem;
+    padding: 1rem;
+    transition: border .25s ease-in-out, gap .25s ease-in-out;
+}
+
+.jump-back:hover{
+    border: 1px solid var(--text);
+    gap: 2rem;
+}
+
+.jump-back svg {
+    height: 1.5rem;
+    width: 1.5rem;
+}

@@ -7,14 +7,17 @@ https://www.realtimecolors.com/?colors=f0effa-0c0b23-635fce-0a0a1f-3e3abb&fonts=
 
 :root {
   --text: rgb(240, 239, 250);
+  --text-disabled: #6d7280;
   --background: rgb(12, 11, 35);
+  /* --background: rgb(33, 40, 49); */
   --primary: rgb(99, 95, 206);
   --secondary: rgb(10, 10, 31);
   --secondary-tone: rgb(25, 25, 59);
   --accent: rgb(62, 58, 187);
 
-  --item-odd: rgb(0, 48, 86);
-  --item-even: rgb(4, 81, 140);
+  --item: rgb(41, 48, 57);
+  --item-disabled: rgb(121, 121, 121);
+  /* --item: rgb(0, 48, 86); */
   --item-head: rgb(6, 5, 18);
 
   --primary-font: 'Roboto', sans-serif;
@@ -28,6 +31,7 @@ https://www.realtimecolors.com/?colors=f0effa-0c0b23-635fce-0a0a1f-3e3abb&fonts=
   --border-color: rgba(255, 255, 255, 0.1);
 
   --generic-shadow: 0 0 2rem 0 rgba(0, 0, 0, .75);
+  --slight-shadow: 0 0 3rem 0 rgba(0, 0, 0, .25);
 
   --gradient-1: rgb(84, 0, 50);
   --gradient-2: rgb(240, 67, 58);
@@ -48,7 +52,6 @@ https://www.realtimecolors.com/?colors=f0effa-0c0b23-635fce-0a0a1f-3e3abb&fonts=
     --primary: rgb(53, 49, 160);
     --secondary: rgb(224, 224, 245);
     --accent: rgb(72, 68, 197);
-
   }
 }
 
@@ -175,4 +178,42 @@ span.access-privileged {
 
 .module.highlight-module {
   background-color: var(--secondary-tone) !important;
+}
+
+*[data-tooltip-id] {
+  cursor: help;
+}
+
+.user-object {
+  display: grid;
+  grid-template-rows: 1.25rem 1.25rem;
+  grid-template-columns: 2.5rem 1fr;
+  justify-content: center;
+  column-gap: .5rem;
+}
+
+.user-avatar {
+  grid-row: 1/3;
+  grid-column: 1/2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.user-name {
+  font-weight: 600;
+  grid-row: 1/3;
+  grid-column: 2/3;
+}
+
+.user-id {
+  font-weight: 300;
+  grid-row: 2/3;
+  grid-column: 2/3;
+}
+
+.user-avatar img {
+  height: 2.25rem;
+  width: 2.25rem;
+  border-radius: 100%;
 }

@@ -1,38 +1,22 @@
 'use client'
 
 import { useRouter } from 'next/navigation';
-import '../sidemap/sidemap.css'
 import { RiShieldFill, RiShieldFlashFill } from 'react-icons/ri'
-import { BsFileEarmarkPersonFill, BsChatLeftTextFill } from 'react-icons/bs'
+import { BsFileEarmarkPersonFill, BsChatLeftTextFill, BsArrowLeft } from 'react-icons/bs'
 import { FiFileText, FiSettings } from 'react-icons/fi'
-import { TbReload, TbSearch } from 'react-icons/tb'
 import React from 'react';
+import { SidemapProps, ModuleSectionProps } from '@/app/types';
 
-type SidemapProps = {
-    render: {
-        reloadDataBtn: boolean
-        searchBar: boolean
-    },
-    highlight_module: string | undefined
-}
+import './sidemap.css'
+import '../globals.css'
 
-type ModuleSectionProps = {
-    highlight_module: string | undefined
-}
-
-export default function Sidemap({ render, highlight_module }: SidemapProps) {
+export default function Sidemap({ highlight_module, render }: SidemapProps) {
+    const router = useRouter();
     return (
         <nav className="sidemap-navigation">
-            <section className="interface">
-                {/* <div className="interface-item reload-data" hidden={!render.reloadDataBtn}>
-                    <TbReload />
-                </div>
-                <div className="interface-item searchbar" hidden={!render.searchBar}>
-                    <input type="search" name="search-modules" id="searchbar-modules" />
-                    <TbSearch />
-                </div> */}
-            </section>
-            <ModuleSection highlight_module={highlight_module} />
+            {
+                render.jump_back ? <button className="jump-back" onClick={() => { router.push('../') }}><BsArrowLeft />Back</button> : <ModuleSection highlight_module={highlight_module} />
+            }
         </nav>
     )
 }
@@ -52,7 +36,7 @@ function ModuleSection({ highlight_module }: ModuleSectionProps) {
                 <p>Moderation</p>
                 <RiShieldFill />
             </div>
-            <div className={`module ${isHighlighted('cases') ? 'highlight-module' : ''}`} id='cases' onClick={() => router.push('../cases/')}>
+            <div className={`module ${isHighlighted('cases') ? 'highlight-module' : ''}`} id='cases' onClick={() => router.push('../cases')}>
                 <p>Cases</p>
                 <BsFileEarmarkPersonFill />
             </div>

@@ -4,9 +4,11 @@ import { Tooltip } from 'react-tooltip'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image';
 import { FaChevronDown } from 'react-icons/fa'
-import '../nav/nav.css';
 import { FiChevronRight } from 'react-icons/fi'
 import React from 'react';
+
+import '../globals.css'
+import './nav.css';
 
 type NavigationProps = {
     render: {
@@ -20,7 +22,7 @@ export default function Navigation({ render }: NavigationProps) {
     return (
         <nav className='main-navigation'>
             <Tooltip id="tooltip" />
-            <button className="nav-logo" onClick={() => router.push('../home/')}>
+            <button className="nav-logo" onClick={() => router.push('/home')}>
                 <Image
                     className='img-avatar'
                     src={'https://cdn.discordapp.com/avatars/979794367759908934/5456a3c30015c48499c5b5e0fb44aabb.webp'}

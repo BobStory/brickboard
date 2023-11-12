@@ -1,0 +1,80 @@
+.case-view {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.case-view-item {
+    background-color: var(--secondary-tone);
+    padding: 2rem;
+    border-radius: .25rem;
+    box-shadow: var(--slight-shadow);
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.action-container,
+.timeline-container,
+.participants-container {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+.case-view-heading {
+    text-transform: uppercase;
+    font-size: 1rem;
+}
+
+.timeline-event {
+    text-transform: uppercase;
+    font-size: .9rem;
+}
+
+.timeline-item-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+}
+
+.timeline-item {
+    padding: .75rem;
+    border-radius: .5rem;
+    background-color: var(--secondary-tone);
+    border: 1px solid var(--border-color);
+}
+
+.case-view-btn-container{
+    display: flex;
+    flex-direction: row;
+    gap: .5rem;
+}
+
+.case-action-btn {
+    cursor: pointer;
+    all: unset;
+    background-color: var(--item-head);
+    padding: 1rem;
+    border-radius: .5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.case-action-btn svg{
+    height: 1.25rem;
+    width: 1.25rem;
+}
+
+.case-action-btn.delete-btn{
+    background-color: var(--access-privileged);
+}

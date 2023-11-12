@@ -21,8 +21,7 @@ export default function RootLayout({
                 }} />
                 <Sidemap
                     render={{
-                        reloadDataBtn: true,
-                        searchBar: false
+                        jump_back: false
                     }}
                     highlight_module={'cases'}
                 />

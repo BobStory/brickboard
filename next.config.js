@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+
+require('dotenv').config();
+
+module.exports = {
     images: {
         remotePatterns: [
             {
@@ -12,8 +15,11 @@ const nextConfig = {
                 hostname: 'cdn.discordapp.com',
                 pathname: '/avatars/**',
             },
+            {
+                protocol: 'https',
+                hostname: 'cdn.discordapp.com',
+                pathname: '/emojis/**',
+            }
         ],
     }
 }
-
-module.exports = nextConfig
