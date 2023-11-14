@@ -61,14 +61,13 @@ https://www.realtimecolors.com/?colors=f0effa-0c0b23-635fce-0a0a1f-3e3abb&fonts=
   margin: 0;
   color: var(--text);
   font-family: var(--primary-font);
-  overflow: hidden;
-  user-select: none;
 }
 
 body,
 html,
 main {
   background-color: var(--background);
+  overflow-x: hidden;
 }
 
 body {
@@ -216,4 +215,9 @@ span.access-privileged {
   height: 2.25rem;
   width: 2.25rem;
   border-radius: 100%;
+}
+
+button.btn-disabled {
+  cursor: not-allowed !important;
+  filter: blur(2px) saturate(0) grayscale(100%) !important;
 }

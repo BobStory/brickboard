@@ -1,17 +1,22 @@
 .case-view {
     display: flex;
     flex-direction: column;
-    gap: 3rem;
+    gap: 2rem;
 }
 
 .case-view-item {
     background-color: var(--secondary-tone);
     padding: 2rem;
-    border-radius: .25rem;
+    border-radius: .75rem;
     box-shadow: var(--slight-shadow);
+    height: 100%;
+}
+
+.case-tools {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
+    justify-content: space-between;
     gap: 1rem;
 }
 
@@ -24,11 +29,14 @@
     gap: .5rem;
 }
 
+.cc-body-title,
 .case-view-heading {
     text-transform: uppercase;
     font-size: 1rem;
 }
 
+.cc-head-title,
+.cc-row-title,
 .timeline-event {
     text-transform: uppercase;
     font-size: .9rem;
@@ -48,7 +56,7 @@
     border: 1px solid var(--border-color);
 }
 
-.case-view-btn-container{
+.case-view-btn-container {
     display: flex;
     flex-direction: row;
     gap: .5rem;
@@ -70,11 +78,69 @@
     font-size: 1rem;
 }
 
-.case-action-btn svg{
+.case-action-btn svg {
     height: 1.25rem;
     width: 1.25rem;
 }
 
-.case-action-btn.delete-btn{
+.case-action-btn.delete-btn {
     background-color: var(--access-privileged);
+}
+
+.case-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.cc-sep {
+    height: 2px;
+    width: calc(100% - 2rem);
+    background-color: var(--border-color);
+    margin: .75rem 1rem;
+}
+
+.case-content-head {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.cc-head-row {
+    display: flex;
+    flex-direction: column;
+    gap: .25rem;
+}
+
+.case-content-body {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.cc-head-container,
+.cc-body-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.case-content-row {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+.cc-type-desc{
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+}
+
+.cc-type-desc img{
+    margin: 0;
+    height: 1.25rem;
+    width: 1.25rem;
 }
