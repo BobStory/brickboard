@@ -7,47 +7,9 @@ datasource db {
   url      = env("DB_URL")
 }
 
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
-model activ_tickets {
-  t_channel_id BigInt?
-  t_owner_id   BigInt?
-
-  @@ignore
-}
-
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
-model birthdays {
-  user_id BigInt?
-  day     Int?
-  month   Int?
-  year    Int?
-
-  @@ignore
-}
-
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
-model blocklist {
-  user_id         BigInt?
-  moderator_id    BigInt?
-  reason          String? @db.Text
-  start_timestamp BigInt?
-  end_timestamp   BigInt?
-
-  @@ignore
-}
-
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
-model content_violations {
-  user_id   BigInt?
-  rule_id   BigInt?
-  timestamp BigInt?
-
-  @@ignore
-}
-
 model mod_cases {
-  case_id         BigInt  @id @default(autoincrement())
-  type            Int
+  case_id         BigInt  @id
+  type            Int?
   user_id         BigInt?
   author_id       BigInt?
   reason          String? @db.Text
@@ -59,71 +21,18 @@ model mod_cases {
   dm_message_url  String? @db.Text
 }
 
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
-model mod_notes {
-  user_id   BigInt?
-  staff_id  BigInt?
-  timestamp BigInt?
-  reason    String? @db.Text
-
-  @@ignore
+model brickboard_users {
+  id          BigInt  @id
+  username    String  @db.Text
+  global_name String? @db.Text
+  avatar      String  @db.Text
+  locale      String  @db.Text
 }
 
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
-model mod_violations {
-  user_id   BigInt?
-  rule      String? @db.Text
-  timestamp BigInt?
-
-  @@ignore
-}
-
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
-model stats {
-  user_id     BigInt?
-  guild_id    BigInt?
-  messages    Int?
-  attachments Int?
-  sticker     Int?
-  reactions   Int?
-  brickhearts Int?
-
-  @@ignore
-}
-
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
-model ticket_history {
-  t_type       Int?
-  t_channel_id BigInt?
-  t_owner_id   BigInt?
-  t_avatar_url String? @db.Text
-
-  @@ignore
-}
-
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
-model ticket_messages {
-  staff_message_url String? @db.Text
-  user_message_url  String? @db.Text
-
-  @@ignore
-}
-
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
-model watchlist {
-  user_id      BigInt?
-  moderator_id BigInt?
-  channel_id   BigInt?
-
-  @@ignore
-}
-
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
-model xp_list_888804850152927292 {
-  member_id     BigInt?
-  xp            Int?
-  last_message  BigInt?
-  premium_until BigInt?
-
-  @@ignore
+model brickboard_auth {
+  id            BigInt  @id
+  access_token  String? @db.VarChar(255)
+  refresh_token String? @db.VarChar(255)
+  scope         String? @db.Text
+  session_id    String? @db.VarChar(64)
 }

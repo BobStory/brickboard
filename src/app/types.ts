@@ -73,3 +73,37 @@ export interface UserDisplyOptions {
     size: 'small' | 'medium' | 'large'
     user: number[] | bigint[] | any
 }
+
+export type NavigationProps = {
+    render: {
+        locationHint: boolean,
+        locationHintContent: Array<string>
+    }
+}
+
+export type DiscordUserObject = {
+    id: string | number,
+    username: string,
+    global_name?: string,
+    avatar: string
+    bot?: boolean
+    system?: boolean
+    mfa_enabled?: boolean
+    banner?: string
+    accent_color?: number
+    locale: string
+    verified?: boolean
+    email?: string
+    flags?: number
+    premium_type?: number
+    public_flags?: number
+    avatar_decoration?: string
+}
+
+export type AuthDataObject = {
+    token_type: string
+    access_token: string
+    expires_in: number
+    refresh_token: string
+    scope: string
+}

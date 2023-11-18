@@ -9,6 +9,7 @@ import React from 'react';
 
 import '../globals.css'
 import './nav.css';
+import { LoginButton } from '../components/button';
 
 type NavigationProps = {
     render: {
@@ -42,19 +43,7 @@ export default function Navigation({ render }: NavigationProps) {
                         </React.Fragment>
                     ))}
                 </div>
-                <div className="nav-item nav-user">
-                    <span className="user-icon">
-                        <Image
-                            className='img-avatar'
-                            src={'https://cdn.discordapp.com/embed/avatars/3.png'}
-                            alt={'User Avatar'}
-                            height={144}
-                            width={144}
-                        />
-                    </span>
-                    <span className="user-name">Wumpus3000</span>
-                    <FaChevronDown></FaChevronDown>
-                </div>
+                <LoginButton />
             </div>
         </nav>
     )
