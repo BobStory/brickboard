@@ -1,27 +1,42 @@
-import Link from "next/link";
+'use client';
+import Image from 'next/image';
 import { BsDiscord } from "react-icons/bs";
+import { signIn, signOut, useSession } from "next-auth/react";
 
-export async function LoginButton() {
+export function LoginButton() {
+    const { data: session } = useSession();
 
-    function setSession() {
-        const session_id = crypto.randomUUID();
-        const inat = new Date()
-        const exat = new Date(inat.getTime() + 24 * 60 * 60 * 1000).toUTCString();
-        const cookie_content = `session_id=${session_id}; expires=${exat}; path=/`;
-
-        document.cookie = cookie_content;
+    if (session) {
+        return (
+            <button
+                data-tooltip-id="tooltip"
+                data-tooltip-content={'Signout of Discord'}
+                className="nav-item login-btn"
+                onClick={() => signOut()}
+            >
+                <div className='user-object'>
+                    <div className='user-avatar'>
+                        <Image
+                            src={session.user?.image ? session.user.image : 'https://cdn.discordapp.com/embed/avatars/3.png'}
+                            alt={`${session.user?.name}'s Avatar`}
+                            width={128}
+                            height={128}
+                        />
+                    </div>
+                    <p className='user-name'>{session.user?.name}</p>
+                </div>
+            </button>
+        )
     }
-
     return (
-        <Link
-            onClick={setSession}
+        <button
             data-tooltip-id="tooltip"
-            data-tooltip-content={'Login with Discord'}
+            data-tooltip-content={'Signin with Discord'}
             className="nav-item login-btn"
-            target="_self"
-            href={`https://discord.com/api/oauth2/authorize?client_id=1174377662907687023&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fapi%2Foauth%2Fdiscord&response_type=code&scope=identify%20guilds`}
+            onClick={() => signIn()}
         >
             <BsDiscord className="login-icon" />
-        </Link>
+        </button>
     )
+
 }
