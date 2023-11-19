@@ -9,6 +9,8 @@ import Link from 'next/link';
 import "./cases.css";
 import { UserItem } from '../shared/user/user';
 import { CaseType } from '../shared/components/misc';
+import { getServerSession } from 'next-auth';
+import { redirect } from 'next/navigation';
 
 async function getCases() {
     const cases = await prisma.mod_cases.findMany()
@@ -16,7 +18,6 @@ async function getCases() {
 }
 
 export default async function Page() {
-
     const allCases = await getCases();
 
     return (
