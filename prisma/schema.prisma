@@ -7,20 +7,6 @@ datasource db {
   url      = env("DB_URL")
 }
 
-model mod_cases {
-  case_id         BigInt  @id
-  type            Int?
-  user_id         BigInt?
-  author_id       BigInt?
-  reason          String? @db.Text
-  proof           String? @db.Text
-  channel_id      BigInt?
-  timestamp_now   Int?
-  timestamp_end   Int?
-  log_message_url String? @db.Text
-  dm_message_url  String? @db.Text
-}
-
 model brickboard_users {
   id          BigInt  @id
   username    String  @db.Text
@@ -31,8 +17,78 @@ model brickboard_users {
 
 model brickboard_auth {
   id            BigInt  @id
-  access_token  String? @db.VarChar(255)
-  refresh_token String? @db.VarChar(255)
+  access_token  String? @db.Text
+  refresh_token String? @db.Text
   scope         String? @db.Text
-  session_id    String? @db.VarChar(64)
+  session_id    String? @db.Text
+}
+
+model moderation_cases {
+  case_id               BigInt  @id
+  case_type             Int?    @default(0)
+  user_id               BigInt?
+  moderator_id_open     BigInt?
+  reason_open           String? @db.Text
+  proof                 String? @db.Text
+  timestamp_open        Int?
+  duration              Int?
+  channel_id            BigInt?
+  moderator_id_close    BigInt?
+  reason_close          String? @db.Text
+  timestamp_close       Int?
+  dm_message_url        String? @db.Text
+  log_message_url_open  String? @db.Text
+  log_message_url_close String? @db.Text
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model moderation_notes {
+  user_id      BigInt?
+  moderator_id BigInt?
+  timestamp    BigInt?
+  note         String? @db.Text
+
+  @@ignore
+}
+
+model moderation_watchlist {
+  user_id      BigInt  @id
+  moderator_id BigInt?
+  channel_id   BigInt?
+}
+
+model ticket_history {
+  channel_id BigInt   @id
+  type       Int?
+  user_id    BigInt?
+  avatar_url String?  @db.Text
+  open       Boolean? @default(true)
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model ticket_messages {
+  staff_message_url String? @db.Text
+  user_message_url  String? @db.Text
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model user_stats {
+  user_id     BigInt?
+  guild_id    BigInt?
+  messages    Int?
+  attachments Int?
+  sticker     Int?
+  reactions   Int?
+  brickhearts Int?
+
+  @@ignore
+}
+
+model xp_list_888804850152927292 {
+  member_id     BigInt  @id
+  xp            Int?
+  last_message  BigInt?
+  premium_until BigInt?
 }
