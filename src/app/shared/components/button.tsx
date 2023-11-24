@@ -7,6 +7,7 @@ export function LoginButton() {
     const { data: session } = useSession();
 
     if (session) {
+        console.log(session.user);
         return (
             <button
                 data-tooltip-id="tooltip"

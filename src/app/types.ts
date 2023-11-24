@@ -13,49 +13,22 @@ export type status_code =
     'INTERNAL_SERVER_ERROR 500' |
     'NOT_IMPLEMENTED 501'
 
-export interface database_table {
-    table_name: string,
-    table_column: {
-        column_name: string,
-        column_datatype: string
-    }[]
-}
-
-export type database_create = {
-    requested_name: string,
-    status: status_code
-}
-
-export type database_setup = {
-    requested_name: string,
-    requested_table: database_table[] | undefined,
-    status: status_code
-}
-
-export interface internal_case {
-    uuid: `${string}-${string}-${string}-${string}-${string}`,
-    case_id: number,
-    type: 'KICK' | 'BAN' | 'MUTE' | 'WARN' | 'DELETE' | 'BLOCK',
-    user_id: number,
-    reason: string,
-    duration?: 'PERMANENT',
-    author_id: number,
-    log_link: `https://discord.com/channels/${number}/${number}/${number}` | `https://canary.discord.com/channels/${number}/${number}/${number}`,
-    user_notifed: boolean
-}
-
-export interface database_case {
-    case_id: BigInt,
-    type: number | null,
-    user_id: BigInt | null,
-    author_id: BigInt | null,
-    reason: string | null,
-    proof: string | null,
-    channel_id: BigInt | null,
-    timestamp_now: number | null,
-    timestamp_end: number | null,
-    log_message_url: string | null,
-    dm_message_url: string | null
+export interface moderation_case {
+    'case_id': bigint,
+    'case_type': number | null,  //1 = Content moderation block; 2 = Message delete; 3 = Warn; 4 = Timeout; 5 = Kick; 6 = Ban
+    'user_id': bigint | null,
+    'moderator_id_open': bigint | null,
+    'reason_open': string | null,
+    'proof'?: string | null,  //Only by type 1 & 2
+    'timestamp_open': number | null,
+    'duration': number | null, //Timestamp(null if ban, content moderation block, message delete, warn)
+    'channel_id'?: bigint | null,  //Only at type 1 & 2
+    'moderator_id_close'?: bigint | null,  //Only at type 3 - 6
+    'reason_close'?: string | null,  //Only at type 3 - 6
+    'timestamp_close'?: number | null,  //Only at type 3 - 6
+    'dm_message_url'?: string | null,  //null if dms closed / bot is blocked
+    'log_message_url_open': string | null,
+    'log_message_url_close'?: string | null,  //Only at type 3, 4, 5 & 6
 }
 
 export type SidemapProps = {
@@ -107,3 +80,5 @@ export type AuthDataObject = {
     refresh_token: string
     scope: string
 }
+
+export type DashboardUserRole = "user" | "staff" | "admin"

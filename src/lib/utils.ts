@@ -61,7 +61,7 @@ export async function copyText(text: string) {
 export function CaseTypeToString(type: any): string {
     switch (type) {
         case 1:
-            return 'Content moderation triggered'
+            return 'blocked by Content-Moderation'
         case 2:
             return 'Message deleted'
         case 3:
@@ -70,7 +70,7 @@ export function CaseTypeToString(type: any): string {
             return 'User timed out'
         case 5:
             return 'User kicked'
-        case 5:
+        case 6:
             return 'User banned'
         default:
             return 'Unknown Type'

@@ -8,109 +8,124 @@ import { BiCommentDetail } from 'react-icons/bi';
 import '@/app/shared/globals.css'
 import './case.css'
 import { UserDisplay, UserItem } from '@/app/shared/user/user'
-import { CaseNoteItem, CaseType, TimelineItem } from '@/app/shared/components/misc';
+import { CaseType, TimelineItem } from '@/app/shared/components/misc';
 import { CaseTypeToString } from '@/lib/utils';
+import { getServerSession } from 'next-auth/next';
+import { redirect } from 'next/navigation';
+import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 
 export default async function Page({ params }: { params: { case_id: number } }) {
-    const mod_case = await prisma.mod_cases.findUnique({
-        where: {
-            case_id: params.case_id
-        }
-    })
 
-    if (mod_case) {
+    const session = await getServerSession(authOptions);
+    if (!session || !session.user) {
+        redirect(`/api/auth/signin?callbackUrl=/cases/view/${params.case_id}`);
+    }
 
-        return (
-            <>
-                <Navigation render={{
-                    locationHint: false,
-                    locationHintContent: ['Cases', `Case ${params.case_id}`]
-                }} />
-                <Sidemap
-                    render={{
-                        jump_back: true
-                    }}
-                    highlight_module={undefined}
-                />
-                <main className='case-view'>
-                    <section className='case-view-item case-tools'>
-                        <div className="participants-container tool-container">
-                            <h3 className='case-view-heading'>Participants</h3>
-                            {/* <UserDisplay size={'medium'} user={[mod_case?.author_id, mod_case?.user_id]} /> */}
-                            <UserDisplay size={'medium'} user={[1, 2, 3, 4]} />
-                        </div>
-                        <div className="timeline-container tool-container">
-                            <h3 className='case-view-heading'>Timeline</h3>
-                            <div className="timeline-item-container">
-                                <TimelineItem event={'note added by Wumpus2000'} date={Date.now()} />
-                                <TimelineItem event={'Timeout ended'} date={Date.now()} />
-                                <TimelineItem event={'Wumpus1000 Timed out'} date={Date.now()} />
-                            </div>
-                        </div>
-                        <div className="action-container">
-                            <h3 className='case-view-heading'>Actions</h3>
-                            <div className='case-view-btn-container'>
-                                <button className="case-action-btn"><MdModeEditOutline /> edit</button>
-                                <button className="case-action-btn btn-disabled" disabled><BiCommentDetail /> comment</button>
-                                <button className="case-action-btn delete-btn"><BsTrashFill /> delete</button>
-                            </div>
-                        </div>
-                    </section>
-                    <section className='case-view-item case-content'>
-                        <div className="case-content-head">
-                            <h3 className="cc-body-title">Overview</h3>
-                            <div className="cc-head-container">
-                                <div className="cc-head-row">
-                                    <h3 className="cc-head-title">Initial Reason</h3>
-                                    <p className="cc-row-desc cc-type-desc">
-                                        <CaseType case_type={mod_case.type} />
-                                        {CaseTypeToString(mod_case.type)}
-                                    </p>
-                                </div>
-                                <div className="cc-head-row">
-                                    <h3 className="cc-head-title">Performed By</h3>
-                                    <p className="cc-row-desc">
-                                        <UserItem user_id={undefined} />
-                                    </p>
-                                </div>
-                                <div className="cc-head-row">
-                                    <h3 className="cc-head-title">at</h3>
-                                    <p className="cc-row-desc">13. November 2023</p>
-                                </div>
-                            </div>
-                        </div>
-                        <tr className="cc-sep"></tr>
-                        <div className="case-content-body">
-                            <h3 className="cc-body-title">Details</h3>
-                            <div className="cc-body-container">
-                                <div className="case-content-row">
-                                    <h4 className="cc-row-title">Duration</h4>
-                                    <p className="cc-row-desc">-</p>
-                                </div>
-                                <div className="case-content-row">
-                                    <h4 className="cc-row-title">User</h4>
-                                    <p className="cc-row-desc">
-                                        <UserItem user_id={undefined} />
-                                    </p>
-                                </div>
-                                <div className="case-content-row">
-                                    <h4 className="cc-row-title">Case-ID</h4>
-                                    <p className="cc-row-desc">{params.case_id}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                    {/* <section className='case-view-item case-notes'>
-                        <CaseNoteItem case_note={undefined} />
-                    </section> */}
-                </main>
-            </>
-        )
+    if (session?.user?.role == 'user') {
+        return (<main className='main-cases'>Sorry, {session.user.name ? session.user.name : 'Unknown User'}, you're not allowed to visit this page!</main>)
     }
     else {
-        return (
-            <code>Unknwon Error while fetching case</code>
-        )
+
+        const mod_case = await prisma.moderation_cases.findUnique({
+            where: {
+                case_id: params.case_id
+            }
+        })
+
+        if (mod_case) {
+
+            return (
+                <>
+                    <Navigation render={{
+                        locationHint: false,
+                        locationHintContent: ['Cases', `Case ${params.case_id}`]
+                    }} />
+                    <Sidemap
+                        render={{
+                            jump_back: true
+                        }}
+                        highlight_module={undefined}
+                    />
+                    <main className='case-view'>
+                        <section className='case-view-item case-tools'>
+                            <div className="participants-container tool-container">
+                                <h3 className='case-view-heading'>Participants</h3>
+                                {/* <UserDisplay size={'medium'} user={[mod_case?.author_id, mod_case?.user_id]} /> */}
+                                <UserDisplay size={'medium'} user={[1, 2, 3, 4]} />
+                            </div>
+                            <div className="timeline-container tool-container">
+                                <h3 className='case-view-heading'>Timeline</h3>
+                                <div className="timeline-item-container">
+                                    <TimelineItem event={'note added by Wumpus2000'} date={Date.now()} />
+                                    <TimelineItem event={'Timeout ended'} date={Date.now()} />
+                                    <TimelineItem event={'Wumpus1000 Timed out'} date={Date.now()} />
+                                </div>
+                            </div>
+                            <div className="action-container">
+                                <h3 className='case-view-heading'>Actions</h3>
+                                <div className='case-view-btn-container'>
+                                    <button className="case-action-btn"><MdModeEditOutline /> edit</button>
+                                    <button className="case-action-btn btn-disabled" disabled><BiCommentDetail /> comment</button>
+                                    <button className="case-action-btn delete-btn"><BsTrashFill /> delete</button>
+                                </div>
+                            </div>
+                        </section>
+                        <section className='case-view-item case-content'>
+                            <div className="case-content-head">
+                                <h3 className="cc-body-title">Overview</h3>
+                                <div className="cc-head-container">
+                                    <div className="cc-head-row">
+                                        <h3 className="cc-head-title">Initial Reason</h3>
+                                        <p className="cc-row-desc cc-type-desc">
+                                            <CaseType case_type={mod_case.case_type} />
+                                            {CaseTypeToString(mod_case.case_type)}
+                                        </p>
+                                    </div>
+                                    <div className="cc-head-row">
+                                        <h3 className="cc-head-title">Performed By</h3>
+                                        <p className="cc-row-desc">
+                                            <UserItem user_id={undefined} />
+                                        </p>
+                                    </div>
+                                    <div className="cc-head-row">
+                                        <h3 className="cc-head-title">at</h3>
+                                        <p className="cc-row-desc">13. November 2023</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <tr className="cc-sep"></tr>
+                            <div className="case-content-body">
+                                <h3 className="cc-body-title">Details</h3>
+                                <div className="cc-body-container">
+                                    <div className="case-content-row">
+                                        <h4 className="cc-row-title">Duration</h4>
+                                        <p className="cc-row-desc">-</p>
+                                    </div>
+                                    <div className="case-content-row">
+                                        <h4 className="cc-row-title">User</h4>
+                                        <p className="cc-row-desc">
+                                            <UserItem user_id={undefined} />
+                                        </p>
+                                    </div>
+                                    <div className="case-content-row">
+                                        <h4 className="cc-row-title">Case-ID</h4>
+                                        <p className="cc-row-desc">{params.case_id}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        {/* <section className='case-view-item case-notes'>
+                            <CaseNoteItem case_note={undefined} />
+                        </section> */}
+                    </main>
+                </>
+            )
+        }
+        else {
+            return (
+                <code>Unknwon Error while fetching case</code>
+            )
+        }
     }
 
 }
