@@ -21,7 +21,7 @@ export default async function Page({ params }: { params: { case_id: number } }) 
         redirect(`/api/auth/signin?callbackUrl=/cases/view/${params.case_id}`);
     }
 
-    if (session?.user?.role == 'user') {
+    if (session?.user?.role == 'ROLE_USER') {
         return (<main className='main-cases'>Sorry, {session.user.name ? session.user.name : 'Unknown User'}, you're not allowed to visit this page!</main>)
     }
     else {

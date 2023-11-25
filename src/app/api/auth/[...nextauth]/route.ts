@@ -8,49 +8,31 @@ export const authOptions = {
         DiscordProvider({
 
             profile(profile) {
+                let user_role: DashboardUserRole = 'ROLE_USER';
 
-                console.log(profile.id);
-
-                let user_role: DashboardUserRole = 'user';
-
-                if (profile.id ===
-                    '285474318513602561' ||
-                    '285424116725710849' ||
-                    '715832738879373353'
+                if (profile.id === '285474318513602561' ||
+                    profile.id === '285424116725710849' ||
+                    profile.id === '715832738879373353'
                 ) {
-                    user_role = 'admin';
-                    return {
-                        ...profile,
-                        role: user_role,
-                        name: profile.username,
-                        image: `https://cdn.discordapp.com/avatars/${profile.id}/${profile.avatar}.png`
-                    };
+                    user_role = 'ROLE_ADMIN';
                 }
-                else if (profile.id ===
-                    '605037700650893312' ||
-                    '273800336710565888' ||
-                    '699954782978310244' ||
-                    '311097844767653889' ||
-                    '714844088976932945' ||
-                    '720533507427926056'
+
+                if (profile.id === '605037700650893312' ||
+                    profile.id === '273800336710565888' ||
+                    profile.id === '699954782978310244' ||
+                    profile.id === '311097844767653889' ||
+                    profile.id === '714844088976932945' ||
+                    profile.id === '720533507427926056'
                 ) {
-                    user_role = 'staff';
-                    return {
-                        ...profile,
-                        role: user_role,
-                        name: profile.username,
-                        image: `https://cdn.discordapp.com/avatars/${profile.id}/${profile.avatar}.png`
-                    };
+                    user_role = 'ROLE_STAFF';
                 }
-                else {
-                    user_role = 'user';
-                    return {
-                        ...profile,
-                        role: user_role,
-                        name: profile.username,
-                        image: `https://cdn.discordapp.com/avatars/${profile.id}/${profile.avatar}.png`
-                    };
-                }
+
+                return {
+                    ...profile,
+                    role: user_role,
+                    name: profile.username,
+                    image: `https://cdn.discordapp.com/avatars/${profile.id}/${profile.avatar}.png`
+                };
 
             },
             clientId: process.env.DISCORD_CLIENT_ID as string,

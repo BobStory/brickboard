@@ -1,3 +1,5 @@
+import { DefaultUser, User } from "next-auth"
+
 // https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
 export type status_code =
     'OK 200' |
@@ -81,4 +83,15 @@ export type AuthDataObject = {
     scope: string
 }
 
-export type DashboardUserRole = "user" | "staff" | "admin"
+export type DashboardUserRole = "ROLE_USER" | "ROLE_STAFF" | "ROLE_ADMIN"
+
+type UserId = string
+
+declare module 'next-auth' {
+    interface Session {
+        user: User & {
+            id: UserId,
+            role: DashboardUserRole
+        }
+    }
+}

@@ -9,6 +9,8 @@ import { SidemapProps, ModuleSectionProps } from '@/app/types';
 
 import './sidemap.css'
 import '../globals.css'
+import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { getServerSession } from 'next-auth';
 
 export default function Sidemap({ highlight_module, render }: SidemapProps) {
     const router = useRouter();

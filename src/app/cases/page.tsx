@@ -19,19 +19,16 @@ async function getCases() {
 }
 
 export default async function Page() {
-
     const session = await getServerSession(authOptions);
-
-    console.log(session);
 
     if (!session || !session.user) {
         redirect('/api/auth/signin?callbackUrl=/cases');
     }
-
+    
     const allCases = await getCases();
 
-    if (session?.user?.role == 'user') {
-        return (<main className='main-cases'>Sorry, {session.user.name ? session.user.name : 'Unknown User'}, you're not allowed to view this!</main>)
+    if (session?.user?.role == 'ROLE_USER') {
+        return (<main className='main-cases'>Sorry, {session.user.name ? session.user.name : 'Unknown User'} - you have no permission to visit this page!</main>)
     }
     else {
         return (
