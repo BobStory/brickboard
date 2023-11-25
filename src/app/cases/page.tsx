@@ -54,7 +54,7 @@ export default async function Page() {
                             <p>id</p>
                             <p>User</p>
                             <p>Reason</p>
-                            <p>Author</p>
+                            <p>Moderator</p>
                             <p>Created</p>
                             <p>Duration</p>
                         </div>

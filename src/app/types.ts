@@ -40,9 +40,7 @@ export type SidemapProps = {
     highlight_module: string | undefined
 }
 
-export type ModuleSectionProps = {
-    highlight_module: string | undefined
-}
+export type ModuleSectionProps = string | undefined
 
 export interface UserDisplyOptions {
     size: 'small' | 'medium' | 'large'
