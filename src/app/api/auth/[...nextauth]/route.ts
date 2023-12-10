@@ -1,7 +1,6 @@
 import { DashboardUserRole } from "@/app/types";
 import NextAuth from "next-auth";
 import DiscordProvider from "next-auth/providers/discord";
-import { useReducer } from "react";
 
 export const authOptions = {
     providers: [
@@ -27,6 +26,11 @@ export const authOptions = {
                     user_role = 'ROLE_STAFF';
                 }
 
+                if (profile.id === '993589924924248134'
+                ) {
+                    user_role = 'ROLE_DEV';
+                }
+
                 return {
                     ...profile,
                     role: user_role,
@@ -48,7 +52,6 @@ export const authOptions = {
     callbacks: {
         async jwt({ token, user }: any) {
             if (user) {
-                console.log(user)
                 token.role = user.role
                 token.name = user.name
                 token.avatar = user.image
