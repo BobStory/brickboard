@@ -12,6 +12,7 @@ import { CaseType } from '../shared/components/misc';
 import { getServerSession } from 'next-auth/next';
 import { redirect } from 'next/navigation';
 import { authOptions } from '../api/auth/[...nextauth]/route';
+import { RespForbidden } from '../shared/components/responses';
 
 async function getCases() {
     const cases = await prisma.moderation_cases.findMany()
@@ -24,16 +25,20 @@ export default async function Page() {
     if (!session || !session.user) {
         redirect('/api/auth/signin?callbackUrl=/cases');
     }
-    
+
     const allCases = await getCases();
 
     if (session?.user?.role == 'ROLE_USER') {
-        return (<main className='main-cases'>Sorry, {session.user.name ? session.user.name : 'Unknown User'} - you have no permission to visit this page!</main>)
+        return (
+            <main className='main-cases access-denied'>
+                <RespForbidden />
+            </main>
+        )
     }
     else {
         return (
             <main className='main-cases'>
-                <section className="cases-ui">
+                {/* <section className="cases-ui">
                     <div className="cases-ui-wrapper cases-filter">
                         <button className="cases-ui-item btn-disabled" disabled><FaFilter /></button>
                         <button className="cases-ui-item btn-disabled" disabled><BsSearch /></button>
@@ -46,7 +51,7 @@ export default async function Page() {
                             <BsListUl />
                         </button>
                     </div>
-                </section>
+                </section> */}
                 <section className="cases-container">
                     <div className="case-head">
                         <div className="head-item">

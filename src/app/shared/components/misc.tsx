@@ -1,5 +1,6 @@
 import { BsFillQuestionCircleFill } from 'react-icons/bs'
 import Image from 'next/image';
+import { DashboardUserRole } from '@/app/types';
 
 export function CaseNoteItem({ case_note }: { case_note: any }) {
     return (
@@ -97,6 +98,28 @@ export function CaseType({ case_type }: any) {
                 <span className="case-type-icon" data-tooltip-id="tooltip" data-tooltip-content="Type Unknown">
                     <BsFillQuestionCircleFill />
                 </span>
+            )
+    }
+}
+
+export function UserRole({ role_type }: { role_type: DashboardUserRole }) {
+    switch (role_type) {
+        case 'ROLE_ADMIN':
+            return (
+                <span className="user-role role-admin">@administrator</span>
+            )
+        case 'ROLE_STAFF':
+            return (
+                <span className="user-role role-staff">@moderator</span>
+            )
+        case 'ROLE_USER':
+            return (
+                <span className="user-role role-user">@user</span>
+            )
+
+        default:
+            return (
+                <span className="user-role role-unknown">@unknown_role</span>
             )
     }
 }

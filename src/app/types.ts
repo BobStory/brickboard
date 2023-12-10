@@ -1,4 +1,4 @@
-import { DefaultUser, User } from "next-auth"
+import { User } from "next-auth"
 
 // https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
 export type status_code =
@@ -81,7 +81,7 @@ export type AuthDataObject = {
     scope: string
 }
 
-export type DashboardUserRole = "ROLE_USER" | "ROLE_STAFF" | "ROLE_ADMIN"
+export type DashboardUserRole = "ROLE_USER" | "ROLE_STAFF" | "ROLE_ADMIN" | "ROLE_DEV"
 
 type UserId = string
 

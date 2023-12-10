@@ -2,12 +2,12 @@
 import Image from 'next/image';
 import { BsDiscord } from "react-icons/bs";
 import { signIn, signOut, useSession } from "next-auth/react";
+import { UserRole } from './misc';
 
 export function LoginButton() {
     const { data: session } = useSession();
 
     if (session) {
-        console.log(session.user);
         return (
             <button
                 data-tooltip-id="tooltip"
@@ -25,6 +25,7 @@ export function LoginButton() {
                         />
                     </div>
                     <p className='user-name'>{session.user?.name}</p>
+                    <UserRole role_type={session.user.role} />
                 </div>
             </button>
         )

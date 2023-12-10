@@ -13,6 +13,7 @@ import { CaseTypeToString } from '@/lib/utils';
 import { getServerSession } from 'next-auth/next';
 import { redirect } from 'next/navigation';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { RespForbidden, RespNotFound } from '@/app/shared/components/responses';
 
 export default async function Page({ params }: { params: { case_id: number } }) {
 
@@ -22,7 +23,11 @@ export default async function Page({ params }: { params: { case_id: number } }) 
     }
 
     if (session?.user?.role == 'ROLE_USER') {
-        return (<main className='main-cases'>Sorry, {session.user.name ? session.user.name : 'Unknown User'}, you're not allowed to visit this page!</main>)
+        return (
+            <main className='main-cases access-denied'>
+                <RespForbidden />
+            </main>
+        )
     }
     else {
 
@@ -123,7 +128,15 @@ export default async function Page({ params }: { params: { case_id: number } }) 
         }
         else {
             return (
-                <code>Unknwon Error while fetching case</code>
+                <>
+                    <Navigation render={{
+                        locationHint: false,
+                        locationHintContent: ['Cases', `Case ${params.case_id}`]
+                    }} />
+                    <main className="access-error">
+                        <RespNotFound />
+                    </main>
+                </>
             )
         }
     }

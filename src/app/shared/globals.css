@@ -36,23 +36,18 @@ https://www.realtimecolors.com/?colors=f0effa-0c0b23-635fce-0a0a1f-3e3abb&fonts=
   --gradient-1: rgb(84, 0, 50);
   --gradient-2: rgb(240, 67, 58);
 
-  --role-mod: rgb(41, 98, 255);
-  --role-dev: rgb(69, 191, 85);
-  --role-admin: rgb(205, 4, 2);
-
-  --access-full: rgb(46, 125, 50);
-  --access-restricted: rgb(242, 183, 5);
-  --access-privileged: rgb(210, 54, 0);
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    --text: rgb(6, 5, 16);
-    --background: rgb(221, 220, 244);
-    --primary: rgb(53, 49, 160);
-    --secondary: rgb(224, 224, 245);
-    --accent: rgb(72, 68, 197);
-  }
+  --role-admin: rgb(255, 30, 0);
+  --bg-role-admin: rgba(255, 30, 0, .5);
+  /* --role-admin: rgb(205, 4, 2);
+  --bg-role-admin: rgba(205, 4, 2, .5); */
+  --role-dev: rgb(190, 185, 69);
+  --bg-role-dev: rgb(190, 185, 69, .5);
+  --role-staff: rgb(41, 169, 255);
+  --bg-role-staff: rgba(41, 169, 255, .5);
+  --role-user: rgb(0, 220, 0);
+  --bg-role-user: rgba(0, 220, 0, .5);
+  --role-unknwon: rgb(190, 190, 190);
+  --bg-role-unknwon: rgba(190, 190, 190, .5);
 }
 
 * {
@@ -67,7 +62,7 @@ body,
 html,
 main {
   background-color: var(--background);
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
 }
 
 body {
@@ -85,6 +80,12 @@ main {
   padding: 5rem;
   height: 100%;
   overflow-y: auto;
+}
+
+main.access-error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 a {
@@ -106,47 +107,38 @@ span.gradient-font {
   background-image: linear-gradient(-45deg, var(--gradient-1), var(--gradient-2));
 }
 
-span.access,
-span.role {
+span.user-role {
   text-transform: uppercase;
-  padding: .75rem;
-  font-weight: 600;
-  border-radius: .5rem;
-  display: inline-flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  gap: .5rem;
-}
-
-span.access svg,
-span.role svg {
-  height: 1.5rem;
-  width: 1.5rem;
-}
-
-span.role-mod {
-  background-color: var(--role-mod);
+  border-radius: .25rem;
+  width: fit-content;
+  padding: .25rem .5rem;
+  font-family: var(--secondary-font);
+  font-weight: 700;
 }
 
 span.role-admin {
-  background-color: var(--role-admin);
+  background-color: var(--bg-role-admin);
+  color: var(--role-admin);
 }
 
 span.role-dev {
-  background-color: var(--role-dev);
+  background-color: var(--bg-role-dev);
+  color: var(--role-dev);
 }
 
-span.access-full {
-  background-color: var(--access-full);
+span.role-staff {
+  background-color: var(--bg-role-staff);
+  color: var(--role-staff);
 }
 
-span.access-restricted {
-  background-color: var(--access-restricted);
+span.role-user {
+  background-color: var(--bg-role-user);
+  color: var(--role-user);
 }
 
-span.access-privileged {
-  background-color: var(--access-privileged);
+span.role-unknown {
+  background-color: var(--bg-role-unknwon);
+  color: var(--role-unknwon);
 }
 
 .interface-item.reload-data {
@@ -184,11 +176,13 @@ span.access-privileged {
 }
 
 .user-object {
+  padding: 0 .25rem;
   display: grid;
-  grid-template-rows: 1.25rem 1.25rem;
-  grid-template-columns: 2.5rem 1fr;
+  grid-template-rows: 1.5rem 1.5rem;
+  grid-template-columns: 3rem auto;
   justify-content: center;
-  column-gap: .5rem;
+  align-items: center;
+  column-gap: .75rem;
 }
 
 .user-avatar {
@@ -201,23 +195,28 @@ span.access-privileged {
 
 .user-name {
   font-weight: 600;
-  grid-row: 1/3;
+  font-size: 1.2rem;
+  grid-row: 1/2;
   grid-column: 2/3;
 }
 
-.user-id {
-  font-weight: 300;
+.user-role {
+  font-size: .8rem;
   grid-row: 2/3;
   grid-column: 2/3;
 }
 
 .user-avatar img {
-  height: 2.25rem;
-  width: 2.25rem;
+  height: 3rem;
+  aspect-ratio: 1/1;
   border-radius: 100%;
 }
 
 button.btn-disabled {
   cursor: not-allowed !important;
   filter: blur(2px) saturate(0) grayscale(100%) !important;
+}
+
+.response-container a {
+  text-decoration: dotted white underline;
 }

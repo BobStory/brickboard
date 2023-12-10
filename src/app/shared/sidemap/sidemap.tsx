@@ -9,6 +9,7 @@ import '../globals.css'
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { getServerSession } from 'next-auth';
 import Link from 'next/link';
+import { RespInternalServerError } from '../components/responses';
 
 export default function Sidemap({ highlight_module, render }: SidemapProps) {
     return (
@@ -130,12 +131,7 @@ function SidemapContent({ highlight_module, role_mode }: { highlight_module: Mod
             )
 
         default:
-            return (
-                <>
-                    <code>500 - Internal Server Error.</code>
-                    <small>You should not see this. Try to login again or with an diffrent account. If the error persits, file an issue on GitHub</small>
-                </>
-            )
+            return (<RespInternalServerError />)
 
     }
 
