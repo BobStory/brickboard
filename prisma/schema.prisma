@@ -23,24 +23,6 @@ model brickboard_auth {
   session_id    String? @db.Text
 }
 
-model moderation_cases {
-  case_id               BigInt  @id
-  case_type             Int?    @default(0)
-  user_id               BigInt?
-  moderator_id_open     BigInt?
-  reason_open           String? @db.Text
-  proof                 String? @db.Text
-  timestamp_open        Int?
-  duration              Int?
-  channel_id            BigInt?
-  moderator_id_close    BigInt?
-  reason_close          String? @db.Text
-  timestamp_close       Int?
-  dm_message_url        String? @db.Text
-  log_message_url_open  String? @db.Text
-  log_message_url_close String? @db.Text
-}
-
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
 model moderation_notes {
   user_id      BigInt?
@@ -91,4 +73,50 @@ model xp_list_888804850152927292 {
   xp            Int?
   last_message  BigInt?
   premium_until BigInt?
+}
+
+model mod_cases {
+  id                   BigInt  @id
+  type                 Int?
+  userId               BigInt?
+  duration             BigInt?
+  timestamp_open       Int?
+  moderatorId_open     BigInt?
+  reason_open          String? @db.Text
+  proof                String? @db.Text
+  comment              String? @db.Text
+  channelId            BigInt?
+  timestamp_close      Int?
+  moderatorId_close    BigInt?
+  reason_close         String? @db.Text
+  userMessageURL_open  String? @db.Text
+  logMessageURL_open   String? @db.Text
+  userMessageURL_close String? @db.Text
+  logMessageURL_close  String? @db.Text
+}
+
+model moderation_cases_old {
+  case_id               BigInt  @id
+  case_type             Int?
+  user_id               BigInt?
+  moderator_id_open     BigInt?
+  reason_open           String? @db.Text
+  proof                 String? @db.Text
+  timestamp_open        Int?
+  duration              Int?
+  channel_id            BigInt?
+  moderator_id_close    BigInt?
+  reason_close          String? @db.Text
+  timestamp_close       Int?
+  dm_message_url        String? @db.Text
+  log_message_url_open  String? @db.Text
+  log_message_url_close String? @db.Text
+}
+
+model tickets {
+  channel_id BigInt   @id
+  type       Int?
+  user_id    BigInt?
+  avatar_url String?  @db.Text
+  open       Boolean?
 }

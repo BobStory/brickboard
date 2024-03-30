@@ -31,7 +31,7 @@ export default async function Page({ params }: { params: { case_id: number } }) 
     }
     else {
 
-        const mod_case = await prisma.moderation_cases.findUnique({
+        const mod_case = await prisma.moderation_cases_old.findUnique({
             where: {
                 case_id: params.case_id
             }

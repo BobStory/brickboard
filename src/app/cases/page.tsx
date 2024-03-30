@@ -15,7 +15,7 @@ import { authOptions } from '../api/auth/[...nextauth]/route';
 import { RespForbidden } from '../shared/components/responses';
 
 async function getCases() {
-    const cases = await prisma.moderation_cases.findMany()
+    const cases = await prisma.moderation_cases_old.findMany()
     return cases.reverse()
 }
 
