@@ -44,7 +44,7 @@ export const authOptions = {
             authorization: {
                 url: 'https://discord.com/api/oauth2/authorize',
                 params: {
-                    scope: 'identify guilds'
+                    scope: 'identify guilds guilds.members.read'
                 }
             }
         }),
