@@ -1,5 +1,6 @@
-.main-cases {
-    padding: 0 5rem 5rem 5rem;
+.cases-main-page {
+    padding: 0;
+    position: relative;
 }
 
 .cases-ui {
@@ -48,61 +49,54 @@
 }
 
 .case-head {
-    border-radius: .5rem .5rem .25rem .25rem;
+    position: sticky;
+    top: 0;
+    border-bottom: solid 1px var(--border-color);
+    background-color: var(--background);
 }
 
-.case-head .head-item,
+.case-head .head-container {
+    display: grid;
+    column-gap: .75rem;
+    grid-template-rows: auto;
+    grid-template-columns: 1.5rem 5rem 5rem auto 5rem 5rem 5rem;
+    align-items: center;
+}
+
+.case-head .head-item {
+    padding: .75rem;
+}
+
+.head-item.plch {
+    grid-column: 1/1;
+}
+
 .case-body .case-item {
     display: grid;
     column-gap: .75rem;
-    grid-template-rows: 1fr;
-    grid-template-columns: min-content min-content 15rem auto 15rem 7rem 7rem;
-    align-items: center;
-    padding: .5rem;
-}
-
-.case-item-container {
-    display: grid;
     grid-template-rows: auto;
-    grid-template-columns: .25rem auto;
-    padding: .25rem 0;
+    grid-template-columns: 1.5rem 6rem 15rem auto 15rem 7rem 7rem;
+    align-items: center;
+    padding: .75rem;
 }
 
 .case-item {
     background-color: var(--item);
-    border-radius: 0 .5rem .5rem 0;
-    transition: background-color .25s ease-in-out;
     font-size: .9rem;
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color .25s ease-in-out;
 }
 
 .case-head .head-item {
-    background-color: var(--item-head);
+    background-color: var(--background);
     font-family: var(--secondary-font);
     font-size: var(--primary-size);
     text-transform: uppercase;
     line-height: 2rem;
     letter-spacing: -.01rem;
     font-weight: 600;
-    padding: .75rem .5rem;
-}
-
-.case-item-container span {
     height: 100%;
     width: 100%;
-    border-radius: .5rem 0 0 .5rem;
-    background-color: #8e95ec;
-}
-
-.case-item-container span.status-open {
-    background-color: #57F287;
-}
-
-.case-item-container span.status-closed {
-    background-color: #ED4245;
-}
-
-.case-item:hover {
-    background-color: rgb(56, 62, 69);
 }
 
 .case-status-icon,
@@ -110,27 +104,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: .25rem .5rem;
 }
 
+.case-type-icon svg,
 .case-type-icon {
-    height: 1.5rem;
-    width: 1.5rem;
+    height: 1.35rem;
+    width: 1.35rem;
 }
-
-.case-status-icon {
-    height: 1rem;
-    width: 1rem;
-    border-radius: 100%;
-    background-color: gray;
-}
-
-/* testing
-
-#case-10>span {
-    background-color: var(--text-disabled);
-}
-
-#case-10 .case-item{
-    filter: grayscale(100%);
-} */

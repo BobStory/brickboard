@@ -15,7 +15,7 @@ import { authOptions } from '../api/auth/[...nextauth]/route';
 import { RespForbidden } from '../shared/components/responses';
 
 async function getCases() {
-    const cases = await prisma.moderation_cases_old.findMany()
+    const cases = await prisma.moderation_cases_old.findMany({ take: 30, orderBy: { case_id: 'desc' } });
     return cases.reverse()
 }
 
@@ -37,7 +37,7 @@ export default async function Page() {
     }
     else {
         return (
-            <main className='main-cases'>
+            <main className='case-main-page'>
                 {/* <section className="cases-ui">
                     <div className="cases-ui-wrapper cases-filter">
                         <button className="cases-ui-item btn-disabled" disabled><FaFilter /></button>
@@ -52,16 +52,27 @@ export default async function Page() {
                         </button>
                     </div>
                 </section> */}
-                <section className="cases-container">
+                <section className="case-container">
                     <div className="case-head">
-                        <div className="head-item">
-                            <span className="case-icon-ph"></span>
-                            <p>id</p>
-                            <p>User</p>
-                            <p>Reason</p>
-                            <p>Moderator</p>
-                            <p>Created</p>
-                            <p>Duration</p>
+                        <div className="head-container">
+                            <div className='head-item'>
+                                <p>id</p>
+                            </div>
+                            <div className='head-item'>
+                                <p>user</p>
+                            </div>
+                            <div className='head-item'>
+                                <p>reason</p>
+                            </div>
+                            <div className='head-item'>
+                                <p>moderator</p>
+                            </div>
+                            <div className='head-item'>
+                                <p>created</p>
+                            </div>
+                            <div className='head-item'>
+                                <p>duration</p>
+                            </div>
                         </div>
                     </div>
                     <div className="case-body">
@@ -83,7 +94,6 @@ export default async function Page() {
 async function CaseItem({ case_data }: { case_data: moderation_case }) {
     return (
         <div className='case-item-container' id={`case-${case_data.case_id}`}>
-            <span className={`${case_data.timestamp_open ? 'status-open' : 'status-closed'}${case_data.case_type == 1 ? 'content-mod' : ''}`}></span>
             <Link className='case-item' href={`cases/view/${case_data.case_id}`}>
                 <CaseType case_type={case_data.case_type} />
                 <p>{Number(case_data.case_id)}</p>

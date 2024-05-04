@@ -133,13 +133,13 @@
     gap: .5rem;
 }
 
-.cc-type-desc{
+.cc-type-desc {
     display: inline-flex;
     align-items: center;
     gap: .5rem;
 }
 
-.cc-type-desc img{
+.cc-type-desc img {
     margin: 0;
     height: 1.25rem;
     width: 1.25rem;

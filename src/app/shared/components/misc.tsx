@@ -95,9 +95,9 @@ export function CaseType({ case_type }: any) {
 
         default:
             return (
-                <span className="case-type-icon" data-tooltip-id="tooltip" data-tooltip-content="Type Unknown">
+                <div className="case-type-icon" data-tooltip-id="tooltip" data-tooltip-content="Type Unknown">
                     <BsFillQuestionCircleFill />
-                </span>
+                </div>
             )
     }
 }
