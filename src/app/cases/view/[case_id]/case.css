@@ -2,10 +2,11 @@
     display: flex;
     flex-direction: column;
     gap: 2rem;
+    padding: 3rem;
 }
 
 .case-view-item {
-    background-color: var(--secondary-tone);
+    background-color: var(--background-800);
     padding: 2rem;
     border-radius: .75rem;
     box-shadow: var(--slight-shadow);
@@ -52,8 +53,8 @@
 .timeline-item {
     padding: .75rem;
     border-radius: .5rem;
-    background-color: var(--secondary-tone);
-    border: 1px solid var(--border-color);
+    background-color: var(--background-700);
+    border: 1px solid var(--border);
 }
 
 .case-view-btn-container {
@@ -65,8 +66,8 @@
 .case-action-btn {
     cursor: pointer;
     all: unset;
-    background-color: var(--item-head);
-    padding: 1rem;
+    background-color: var(--accent);
+    padding: .75rem;
     border-radius: .5rem;
     display: flex;
     flex-direction: row;
@@ -75,7 +76,7 @@
     gap: .5rem;
     text-transform: uppercase;
     font-weight: 600;
-    font-size: 1rem;
+    font-size: .85rem;
 }
 
 .case-action-btn svg {
@@ -84,7 +85,7 @@
 }
 
 .case-action-btn.delete-btn {
-    background-color: var(--access-privileged);
+    background-color: var(--accent);
 }
 
 .case-content {
@@ -95,7 +96,7 @@
 .cc-sep {
     height: 2px;
     width: calc(100% - 2rem);
-    background-color: var(--border-color);
+    background-color: var(--border);
     margin: .75rem 1rem;
 }
 

@@ -1,10 +1,10 @@
 import './shared/globals.css'
-import { RespNotFound } from "./shared/components/responses";
+import { ResponseComponent404 } from "./shared/components/responses";
 
 export default function NotFound() {
     return (
         <main className="access-error">
-            <RespNotFound />
+            <ResponseComponent404 />
         </main>
     )
 }

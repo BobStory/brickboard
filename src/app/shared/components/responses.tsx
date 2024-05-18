@@ -1,4 +1,6 @@
-export function RespForbidden() {
+import '../../shared/globals.css';
+
+export function ResponseComponent403() {
     return (
         <div className="response-container">
             <h3>403 - Forbidden</h3>
@@ -15,7 +17,7 @@ export function RespForbidden() {
     )
 }
 
-export function RespUnauthorized() {
+export function ResponseComponent401() {
     return (
         <div className="response-container">
             <h3>401 - Unauthorized</h3>
@@ -32,7 +34,7 @@ export function RespUnauthorized() {
     )
 }
 
-export function RespInternalServerError() {
+export function ResponseComponent500() {
     return (
         <div className="response-container">
             <h3>500 - Internal Server Error</h3>
@@ -46,7 +48,7 @@ export function RespInternalServerError() {
     )
 }
 
-export function RespNotFound() {
+export function ResponseComponent404() {
     return (
         <div className="response-container">
             <h3>404 - Not Found</h3>

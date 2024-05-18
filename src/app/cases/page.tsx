@@ -1,6 +1,3 @@
-import { BsFillGrid3X3GapFill, BsListUl, BsSearch } from 'react-icons/bs'
-import { FaFilter } from "react-icons/fa";
-import 'react-tooltip/dist/react-tooltip.css'
 import prisma from '@/lib/prisma';
 import { moderation_case } from '../types';
 import { toReadableTime, toRelativeTime } from '@/lib/utils'
@@ -8,11 +5,12 @@ import Link from 'next/link';
 
 import "./cases.css";
 import { UserItem } from '../shared/user/user';
-import { CaseType } from '../shared/components/misc';
+import { CaseType, TooltipItem } from '../shared/components/misc';
+import { ResponseComponent403 } from '../shared/components/responses';
+
 import { getServerSession } from 'next-auth/next';
 import { redirect } from 'next/navigation';
 import { authOptions } from '../api/auth/[...nextauth]/route';
-import { RespForbidden } from '../shared/components/responses';
 
 async function getCases() {
     const cases = await prisma.moderation_cases_old.findMany({ take: 30, orderBy: { case_id: 'desc' } });
@@ -31,61 +29,49 @@ export default async function Page() {
     if (session?.user?.role == 'ROLE_USER') {
         return (
             <main className='main-cases access-denied'>
-                <RespForbidden />
+                <ResponseComponent403 />
             </main>
         )
     }
     else {
         return (
-            <main className='case-main-page'>
-                {/* <section className="cases-ui">
-                    <div className="cases-ui-wrapper cases-filter">
-                        <button className="cases-ui-item btn-disabled" disabled><FaFilter /></button>
-                        <button className="cases-ui-item btn-disabled" disabled><BsSearch /></button>
-                    </div>
-                    <div className="cases-ui-wrapper cases-view">
-                        <button className="cases-ui-item btn-disabled" disabled>
-                            <BsFillGrid3X3GapFill />
-                        </button>
-                        <button className="cases-ui-item btn-disabled" disabled>
-                            <BsListUl />
-                        </button>
-                    </div>
-                </section> */}
-                <section className="case-container">
-                    <div className="case-head">
-                        <div className="head-container">
-                            <div className='head-item'>
-                                <p>id</p>
-                            </div>
-                            <div className='head-item'>
-                                <p>user</p>
-                            </div>
-                            <div className='head-item'>
-                                <p>reason</p>
-                            </div>
-                            <div className='head-item'>
-                                <p>moderator</p>
-                            </div>
-                            <div className='head-item'>
-                                <p>created</p>
-                            </div>
-                            <div className='head-item'>
-                                <p>duration</p>
+            <>
+                <TooltipItem />
+                <main className='case-main-page'>
+                    <section className="case-container">
+                        <div className="case-head">
+                            <div className="head-container">
+                                <div className='head-item plchd'></div>
+                                <div className='head-item'>
+                                    <p>id</p>
+                                </div>
+                                <div className='head-item'>
+                                    <p>user</p>
+                                </div>
+                                <div className='head-item'>
+                                    <p>reason</p>
+                                </div>
+                                <div className='head-item'>
+                                    <p>moderator</p>
+                                </div>
+                                <div className='head-item'>
+                                    <p>created</p>
+                                </div>
+                                <div className='head-item'>
+                                    <p>duration</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div className="case-body">
-                        {
-                            allCases.map(mod_case => {
+                        <div className="case-body">
+                            {allCases.map(mod_case => {
                                 return (
                                     <CaseItem key={mod_case.case_id} case_data={mod_case} />
-                                )
-                            })
-                        }
-                    </div>
-                </section>
-            </main>
+                                );
+                            })}
+                        </div>
+                    </section>
+                </main>
+            </>
         )
     }
 
@@ -116,7 +102,7 @@ function CaseDate({ timestamp }: any) {
     }
     else {
         return (
-            <p data-tooltip-id="tooltip" data-tooltip-content="Unknown">-</p>
+            <p data-tooltip-id="tooltip" data-tooltip-content="Unknown"></p>
         )
     }
 }

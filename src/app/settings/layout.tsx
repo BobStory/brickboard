@@ -15,16 +15,17 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body >
-                <Navigation render={{
-                    locationHint: true,
-                    locationHintContent: ['Settings']
-                }} />
-                <Sidemap
+                <Navigation
                     render={{
-                        reloadDataBtn: false,
-                        searchBar: false
+                        locationHint: true,
+                        locationHintContent: ['Settings']
                     }}
+                />
+                <Sidemap
                     highlight_module={'settings'}
+                    render={{
+                        jump_back: false
+                    }}
                 />
                 {children}
             </body>

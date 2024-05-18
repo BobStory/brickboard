@@ -8,7 +8,7 @@ export async function UserItem({ user_id }: { user_id: any }) {
     // const user_data = await fetch(`https://discord.com/api/v9/users/${user_id}`, {
     //     method: 'GET',
     //     headers: {
-    //         'Authorization': `MTExMzc1NTg4NzE5MDk1Mzk5NA.GSEov5.NlVZIH-jc9U8-zF5fdMjMHGQmfrzxGWBzSPIgs`,
+    //         'Authorization': `USER_TOKEN`,
     //         'Content-Type': 'application/json',
     //     },
     // });

@@ -6,27 +6,74 @@ https://www.realtimecolors.com/?colors=f0effa-0c0b23-635fce-0a0a1f-3e3abb&fonts=
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Roboto+Mono&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 :root {
+
   --text: rgb(240, 239, 250);
-  --text-disabled: #6d7280;
   --background: rgb(12, 11, 35);
-  /* --background: rgb(33, 40, 49); */
-  --primary: rgb(99, 95, 206);
-  --secondary: rgb(10, 10, 31);
-  --secondary-tone: rgb(25, 25, 59);
+  --primary: rgb(159, 154, 223);
+  --secondary: rgb(38, 29, 131);
   --accent: rgb(62, 58, 187);
 
-  --item-disabled: rgb(121, 121, 121);
-  --item-head: rgb(6, 5, 18);
+  --text-50: rgb(237, 236, 249);
+  --text-100: rgb(218, 216, 243);
+  --text-200: rgb(182, 177, 231);
+  --text-300: rgb(145, 139, 218);
+  --text-400: rgb(109, 100, 206);
+  --text-500: rgb(72, 61, 194);
+  --text-600: rgb(58, 49, 155);
+  --text-700: rgb(43, 37, 116);
+  --text-800: rgb(29, 24, 78);
+  --text-900: rgb(14, 12, 39);
+  --text-950: rgb(7, 6, 19);
 
-  --primary-font: 'Roboto', sans-serif;
-  --secondary-font: 'Inter', sans-serif;
-  --mono-font: 'Roboto Mono', monospace;
+  --background-50: rgb(236, 236, 249);
+  --background-100: rgb(218, 216, 243);
+  --background-200: rgb(180, 177, 231);
+  --background-300: rgb(143, 139, 218);
+  --background-400: rgb(105, 100, 206);
+  --background-500: rgb(68, 61, 194);
+  --background-600: rgb(54, 49, 155);
+  --background-700: rgb(41, 37, 116);
+  --background-800: rgb(27, 24, 78);
+  --background-900: rgb(14, 12, 39);
+  --background-950: rgb(7, 6, 19);
 
-  --welcome-size: 2rem;
-  --primary-size: 1rem;
-  --secondary-size: .85rem;
+  --primary-50: rgb(237, 236, 249);
+  --primary-100: rgb(218, 216, 243);
+  --primary-200: rgb(181, 177, 231);
+  --primary-300: rgb(144, 139, 218);
+  --primary-400: rgb(107, 100, 206);
+  --primary-500: rgb(70, 61, 194);
+  --primary-600: rgb(56, 49, 155);
+  --primary-700: rgb(42, 37, 116);
+  --primary-800: rgb(28, 24, 78);
+  --primary-900: rgb(14, 12, 39);
+  --primary-950: rgb(7, 6, 19);
 
-  --border-color: rgba(255, 255, 255, 0.1);
+  --secondary-50: rgb(235, 234, 250);
+  --secondary-100: rgb(216, 213, 246);
+  --secondary-200: rgb(177, 171, 237);
+  --secondary-300: rgb(138, 130, 227);
+  --secondary-400: rgb(99, 88, 218);
+  --secondary-500: rgb(59, 46, 209);
+  --secondary-600: rgb(48, 37, 167);
+  --secondary-700: rgb(36, 28, 125);
+  --secondary-800: rgb(24, 18, 84);
+  --secondary-900: rgb(12, 9, 42);
+  --secondary-950: rgb(6, 5, 21);
+
+  --accent-50: rgb(236, 235, 249);
+  --accent-100: rgb(217, 216, 243);
+  --accent-200: rgb(179, 177, 231);
+  --accent-300: rgb(141, 138, 219);
+  --accent-400: rgb(103, 99, 207);
+  --accent-500: rgb(64, 60, 195);
+  --accent-600: rgb(52, 48, 156);
+  --accent-700: rgb(39, 36, 117);
+  --accent-800: rgb(26, 24, 78);
+  --accent-900: rgb(13, 12, 39);
+  --accent-950: rgb(6, 6, 20);
+
+  --border: rgba(255, 255, 255, 0.1);
 
   --generic-shadow: 0 0 2rem 0 rgba(0, 0, 0, .75);
   --slight-shadow: 0 0 3rem 0 rgba(0, 0, 0, .25);
@@ -36,8 +83,6 @@ https://www.realtimecolors.com/?colors=f0effa-0c0b23-635fce-0a0a1f-3e3abb&fonts=
 
   --role-admin: rgb(255, 30, 0);
   --bg-role-admin: rgba(255, 30, 0, .5);
-  /* --role-admin: rgb(205, 4, 2);
-  --bg-role-admin: rgba(205, 4, 2, .5); */
   --role-dev: rgb(190, 185, 69);
   --bg-role-dev: rgb(190, 185, 69, .5);
   --role-staff: rgb(41, 169, 255);
@@ -52,15 +97,16 @@ https://www.realtimecolors.com/?colors=f0effa-0c0b23-635fce-0a0a1f-3e3abb&fonts=
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+  font-family: 'Roboto', sans-serif;
   color: var(--text);
-  font-family: var(--primary-font);
 }
 
 body,
 html,
 main {
   background-color: var(--background);
-  /* overflow-x: hidden; */
+  overflow-x: hidden;
+  max-width: 100dvw;
 }
 
 body {
@@ -109,7 +155,7 @@ span.user-role {
   border-radius: .25rem;
   width: fit-content;
   padding: .25rem .5rem;
-  font-family: var(--secondary-font);
+  font-family: 'Inter', sans-serif;
   font-weight: 700;
 }
 
@@ -165,7 +211,7 @@ span.role-unknown {
 }
 
 .module.highlight-module {
-  background-color: var(--secondary-tone) !important;
+  background-color: var(--background-800) !important;
 }
 
 *[data-tooltip-id] {
@@ -173,11 +219,9 @@ span.role-unknown {
 }
 
 .user-object {
-  padding: 0 .25rem;
   display: grid;
   grid-template-rows: 1.5rem 1.5rem;
   grid-template-columns: 3rem auto;
-  justify-content: center;
   align-items: center;
   column-gap: .75rem;
 }

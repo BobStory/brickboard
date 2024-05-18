@@ -1,10 +1,14 @@
-import { BsFillQuestionCircleFill } from 'react-icons/bs'
+'use client'
+
+import { BsFillGrid3X3GapFill, BsFillQuestionCircleFill, BsListUl, BsSearch } from 'react-icons/bs'
 import Image from 'next/image';
 import { DashboardUserRole } from '@/app/types';
+import { Tooltip } from 'react-tooltip';
+import { FaFilter } from 'react-icons/fa';
 
 export function CaseNoteItem({ case_note }: { case_note: any }) {
     return (
-        <div></div>
+        <div>{case_note}</div>
     )
 }
 
@@ -122,4 +126,32 @@ export function UserRole({ role_type }: { role_type: DashboardUserRole }) {
                 <span className="user-role role-unknown">@unknown_role</span>
             )
     }
+}
+
+export function TooltipItem() {
+    return (
+        <Tooltip
+            style={{ zIndex: 999 }}
+            id="tooltip"
+        />
+    );
+}
+
+export function CaseFilterUI() {
+    return (
+        <section className="cases-ui">
+            <div className="cases-ui-wrapper cases-filter">
+                <button className="cases-ui-item btn-disabled" disabled><FaFilter /></button>
+                <button className="cases-ui-item btn-disabled" disabled><BsSearch /></button>
+            </div>
+            <div className="cases-ui-wrapper cases-view">
+                <button className="cases-ui-item btn-disabled" disabled>
+                    <BsFillGrid3X3GapFill />
+                </button>
+                <button className="cases-ui-item btn-disabled" disabled>
+                    <BsListUl />
+                </button>
+            </div>
+        </section>
+    )
 }

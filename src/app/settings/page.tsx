@@ -1,7 +1,7 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 import { DashboardUserRole } from "../types";
-import { RespForbidden } from "../shared/components/responses";
+import { ResponseComponent403 } from "../shared/components/responses";
 
 export default async function page() {
     const session = await getServerSession(authOptions);
@@ -17,7 +17,7 @@ export default async function page() {
         default:
             return (
                 <main className="access-error">
-                    <RespForbidden />
+                    <ResponseComponent403 />
                 </main>
             )
     }

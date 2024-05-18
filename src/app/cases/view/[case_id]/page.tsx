@@ -1,19 +1,22 @@
 import Navigation from '@/app/shared/nav/nav'
 import Sidemap from '@/app/shared/sidemap/sidemap'
+import { UserDisplay, UserItem } from '@/app/shared/user/user'
+import { CaseType, TimelineItem } from '@/app/shared/components/misc';
+import { ResponseComponent403, ResponseComponent404 } from '@/app/shared/components/responses';
+import { CaseTypeToString } from '@/lib/utils';
+
+import '@/app/shared/globals.css'
+import './case.css'
+
 import prisma from '@/lib/prisma'
+
 import { MdModeEditOutline } from "react-icons/md";
 import { BsTrashFill } from 'react-icons/bs';
 import { BiCommentDetail } from 'react-icons/bi';
 
-import '@/app/shared/globals.css'
-import './case.css'
-import { UserDisplay, UserItem } from '@/app/shared/user/user'
-import { CaseType, TimelineItem } from '@/app/shared/components/misc';
-import { CaseTypeToString } from '@/lib/utils';
 import { getServerSession } from 'next-auth/next';
 import { redirect } from 'next/navigation';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
-import { RespForbidden, RespNotFound } from '@/app/shared/components/responses';
 
 export default async function Page({ params }: { params: { case_id: number } }) {
 
@@ -25,7 +28,7 @@ export default async function Page({ params }: { params: { case_id: number } }) 
     if (session?.user?.role == 'ROLE_USER') {
         return (
             <main className='main-cases access-denied'>
-                <RespForbidden />
+                <ResponseComponent403 />
             </main>
         )
     }
@@ -70,7 +73,6 @@ export default async function Page({ params }: { params: { case_id: number } }) 
                                 <h3 className='case-view-heading'>Actions</h3>
                                 <div className='case-view-btn-container'>
                                     <button className="case-action-btn"><MdModeEditOutline /> edit</button>
-                                    <button className="case-action-btn btn-disabled" disabled><BiCommentDetail /> comment</button>
                                     <button className="case-action-btn delete-btn"><BsTrashFill /> delete</button>
                                 </div>
                             </div>
@@ -134,7 +136,7 @@ export default async function Page({ params }: { params: { case_id: number } }) 
                         locationHintContent: ['Cases', `Case ${params.case_id}`]
                     }} />
                     <main className="access-error">
-                        <RespNotFound />
+                        <ResponseComponent404 />
                     </main>
                 </>
             )

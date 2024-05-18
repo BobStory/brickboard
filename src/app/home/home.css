@@ -8,5 +8,5 @@ main.main_home {
 
 .welcome_msg {
     text-align: center;
-    font-size: var(--welcome-size);
+    font-size: 2rem;
 }

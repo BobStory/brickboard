@@ -1,9 +1,7 @@
 'use client'
 
-import { Tooltip } from 'react-tooltip'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image';
-import { FaChevronDown } from 'react-icons/fa'
 import { FiChevronRight } from 'react-icons/fi'
 import React from 'react';
 
@@ -22,7 +20,6 @@ export default function Navigation({ render }: NavigationProps) {
     const router = useRouter()
     return (
         <nav className='main-navigation'>
-            <Tooltip id="tooltip" />
             <button className="nav-logo" onClick={() => router.push('/home')}>
                 <Image
                     className='img-avatar'
