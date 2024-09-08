@@ -13,7 +13,7 @@ import { redirect } from 'next/navigation';
 import { authOptions } from '../api/auth/[...nextauth]/route';
 
 async function getCases() {
-    const cases = await prisma.moderation_cases_old.findMany({ take: 30, orderBy: { case_id: 'desc' } });
+    const cases = await prisma.moderation_cases_old.findMany({ orderBy: { case_id: 'desc' } });
     return cases.reverse()
 }
 

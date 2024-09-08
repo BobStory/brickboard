@@ -35,11 +35,13 @@ nav.main-navigation {
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: flex-start;
     cursor: pointer;
-    gap: .5rem;
+    gap: .75rem;
     padding: .75rem 1rem;
     margin: .25rem 0;
     border: 1px solid var(--border);
+    min-width: 15rem;
 }
 
 .nav-item .login-icon {

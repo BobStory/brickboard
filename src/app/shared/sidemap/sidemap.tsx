@@ -1,15 +1,18 @@
-import { RiShieldFill, RiShieldFlashFill } from 'react-icons/ri'
-import { BsFileEarmarkPersonFill, BsChatLeftTextFill, BsArrowLeft } from 'react-icons/bs'
-import { FiFileText, FiSettings } from 'react-icons/fi'
 import React from 'react';
+import Link from 'next/link';
+
 import { SidemapProps, ModuleSectionProps, DashboardUserRole } from '@/app/types';
+import { ResponseComponent500 } from '../components/responses';
+
+import { BsFileEarmarkPersonFill, BsArrowLeft } from 'react-icons/bs'
+import { MdOutlineAdminPanelSettings } from 'react-icons/md';
+import { FiFileText, FiSettings } from 'react-icons/fi'
+
+import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { getServerSession } from 'next-auth';
 
 import './sidemap.css'
 import '../globals.css'
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
-import { getServerSession } from 'next-auth';
-import Link from 'next/link';
-import { ResponseComponent500 } from '../components/responses';
 
 export default function Sidemap({ highlight_module, render }: SidemapProps) {
     return (
@@ -34,7 +37,7 @@ async function ModuleSection({ highlight_module }: { highlight_module: ModuleSec
 
 function SidemapContent({ highlight_module, role_mode }: { highlight_module: ModuleSectionProps, role_mode: DashboardUserRole }) {
 
-    const isHighlighted = (moduleId: string) => {
+    function isHighlighted(moduleId: string) {
         return moduleId === highlight_module;
     };
 
@@ -42,92 +45,26 @@ function SidemapContent({ highlight_module, role_mode }: { highlight_module: Mod
         case 'ROLE_ADMIN':
             return (
                 <>
-                    <Link
-                        href={'../auto_moderation/'}
-                        className={`module ${isHighlighted('auto_moderation') ? 'highlight-module' : ''}`} id='auto_moderation'
-                    >
-                        <p>Auto Moderation</p>
-                        <RiShieldFlashFill />
-                    </Link>
-                    <Link
-                        href={'../moderation/'}
-                        className={`module ${isHighlighted('moderation') ? 'highlight-module' : ''}`} id='moderation'
-                    >
-                        <p>Moderation</p>
-                        <RiShieldFill />
-                    </Link>
-                    <Link
-                        href={'../cases'}
-                        className={`module ${isHighlighted('cases') ? 'highlight-module' : ''}`} id='cases'
-                    >
-                        <p>Cases</p>
-                        <BsFileEarmarkPersonFill />
-                    </Link>
-                    <Link
-                        href={'../logs/'}
-                        className={`module ${isHighlighted('logs') ? 'highlight-module' : ''}`} id='logs'
-                    >
-                        <p>Logging</p>
-                        <FiFileText />
-                    </Link>
-                    <Link
-                        href={'../messages/'}
-                        className={`module ${isHighlighted('messages') ? 'highlight-module' : ''}`} id='messages'
-                    >
-                        <p>Messages</p>
-                        <BsChatLeftTextFill />
-                    </Link>
-                    <Link
-                        href={'../settings/'}
-                        className={`module ${isHighlighted('settings') ? 'highlight-module' : ''}`} id='settings'
-                    >
-                        <p>Settings</p>
-                        <FiSettings />
-                    </Link>
+                    <LinkModuleCases isHighlighted={isHighlighted} />
+                    <LinkModuleLogs isHighlighted={isHighlighted} />
+                    <LinkModuleAdministration isHighlighted={isHighlighted} />
+                    <LinkModuleSettings isHighlighted={isHighlighted} />
                 </>
             )
         case 'ROLE_STAFF':
             return (
                 <>
-                    <Link
-                        href={'../moderation/'}
-                        className={`module ${isHighlighted('moderation') ? 'highlight-module' : ''}`} id='moderation'
-                    >
-                        <p>Moderation</p>
-                        <RiShieldFill />
-                    </Link>
-                    <Link
-                        href={'../cases'}
-                        className={`module ${isHighlighted('cases') ? 'highlight-module' : ''}`} id='cases'
-                    >
-                        <p>Cases</p>
-                        <BsFileEarmarkPersonFill />
-                    </Link>
-                    <Link
-                        href={'../logs/'}
-                        className={`module ${isHighlighted('logs') ? 'highlight-module' : ''}`} id='logs'
-                    >
-                        <p>Logging</p>
-                        <FiFileText />
-                    </Link>
-                    <Link
-                        href={'../messages/'}
-                        className={`module ${isHighlighted('messages') ? 'highlight-module' : ''}`} id='messages'
-                    >
-                        <p>Messages</p>
-                        <BsChatLeftTextFill />
-                    </Link>
+                    <LinkModuleCases isHighlighted={isHighlighted} />
+                    <LinkModuleLogs isHighlighted={isHighlighted} />
+                    <LinkModuleSettings isHighlighted={isHighlighted} />
                 </>
             )
         case 'ROLE_USER':
             return (
-                <Link
-                    href={'../cases'}
-                    className={`module ${isHighlighted('cases') ? 'highlight-module' : ''}`} id='cases'
-                >
-                    <p>Cases</p>
-                    <BsFileEarmarkPersonFill />
-                </Link>
+                <>
+                    <LinkModuleCases isHighlighted={isHighlighted} />
+                    <LinkModuleSettings isHighlighted={isHighlighted} />
+                </>
             )
 
         default:
@@ -135,4 +72,52 @@ function SidemapContent({ highlight_module, role_mode }: { highlight_module: Mod
 
     }
 
+}
+
+function LinkModuleCases({ isHighlighted }: { isHighlighted: Function }) {
+    return (
+        <Link
+            href={'../cases'}
+            className={`module ${isHighlighted('cases') ? 'highlight-module' : ''}`} id='cases'
+        >
+            <p>Cases</p>
+            <BsFileEarmarkPersonFill />
+        </Link>
+    )
+}
+
+function LinkModuleLogs({ isHighlighted }: { isHighlighted: Function }) {
+    return (
+        <Link
+            href={'../logs/'}
+            className={`module ${isHighlighted('logs') ? 'highlight-module' : ''}`} id='logs'
+        >
+            <p>Logs</p>
+            <FiFileText />
+        </Link>
+    )
+}
+
+function LinkModuleAdministration({ isHighlighted }: { isHighlighted: Function }) {
+    return (
+        <Link
+            href={'../administration/'}
+            className={`module ${isHighlighted('logs') ? 'highlight-module' : ''}`} id='logs'
+        >
+            <p>Administration</p>
+            <MdOutlineAdminPanelSettings />
+        </Link>
+    )
+}
+
+function LinkModuleSettings({ isHighlighted }: { isHighlighted: Function }) {
+    return (
+        <Link
+            href={'../settings/'}
+            className={`module ${isHighlighted('settings') ? 'highlight-module' : ''}`} id='settings'
+        >
+            <p>Settings</p>
+            <FiSettings />
+        </Link>
+    )
 }
